@@ -1,38 +1,118 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  font-family:'Comfortaa';
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #eaebea;
+  color: #0c0e0c;
+  min-width: 400px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header {
+  background-color: #0c0e0c;
+  color: #eaebea;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.log-input {
+  width: 300px;
+  height: 2rem;
+  border-radius: 10px;
+  padding: 5px; 
+  color:#d8323c;
+  font-weight: 500;
+}
+
+#log-form, #reg-form {
+  border: solid #d8323c 3px;
+  border-radius: 10px;
+  padding: 20px;
+  width: 350px;
+  margin: auto;
+  margin-top: 5%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+ 
 }
 
-.App-link {
-  color: #61dafb;
+.input-label {
+  font-weight: 600;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#log-note {
+  color:#d8323c;
+  font-size: 0.8rem;
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+#log-button {
+  font-size: 1rem;
+  padding: 5px;
+  margin: auto;
+  width: 100px;
+  border-radius: 20px;
+  border: solid 2px #0c0e0c;
+  background-color: #eaebeaa3;
+}
+
+#log-button:hover {
+  color: #eaebea;
+  background-color: #d8323dad;
+  border: solid 2px #d8323c;
+}
+
+.form-link{
+  border: none;
+  color:#d8323c;
+  text-decoration: underline;
+  font-size: 0.8rem;
+}
+
+.main{
+  min-width: 400px;
+}
+.bottom-nav {
+  background-color: #0c0e0c;
+  color:#eaebea;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.bottom-btn {
+  color: #eaebea;
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;;
+}
+
+.bottom-btn:hover{
+  background-color: #d8323dad;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+}
+
+.bottom-btn i{
+  font-size:1.5rem;
+  padding-bottom:3px;
 }
