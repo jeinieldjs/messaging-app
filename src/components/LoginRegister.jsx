@@ -52,7 +52,7 @@ const LoginRegister = () => {
         fetch(endpoint, { method, headers, body })
             .then(response => {
                 if(response.status == 200){
-                    console.log('signup succesful');
+                    alert('signup succesful');
                     setIsLoginVisible(true);
                     setEmail('');
                     setPassword('');

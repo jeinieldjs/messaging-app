@@ -12,7 +12,7 @@ const Main = () => {
     return (
         <>
            <div className='bottom-nav'>
-                <button className='bottom-btn'><i className='fas fa-home' style={{color: '#eaebea'}} onClick={logout}></i>Logout</button>
+                <button className='bottom-btn'><i className='fas fa-sign-out-alt' style={{color: '#eaebea'}} onClick={logout}></i>Logout</button>
             </div>
         </>
     )
