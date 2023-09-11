@@ -3,11 +3,12 @@ import SessionContext from "../contexts/SessionContext";
 
 const LoginRegister = () => {
     const baseURL = 'http://206.189.91.54/api/v1/';
-    
-    const { session, setSession } = useContext(SessionContext)
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;//@symbol, 1 char before @, 1 char after @, 1 ., 1 char after .
+    const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/; //<=8 chars, at least 1: uppercase,lowercase,number 
+    const { session, setSession } = useContext(SessionContext);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [isLoginVisible, setIsLoginVisible] = useState(true);
     const handleSignUpClick = () => {
         setIsLoginVisible(false);
@@ -33,6 +34,13 @@ const LoginRegister = () => {
                         uid: response.headers.get('uid'),
                         expiry: response.headers.get('expiry')
                     })
+                } else if (response.status === 404) {
+                    alert('Email is not registered.');
+                } else if (response.status === 401) {
+                    alert('Incorrect email or password.');
+                } else {
+                    alert('An error occurred while logging in.');
+                    console.log(response);
                 }
             })
             .catch(error => {
@@ -43,6 +51,19 @@ const LoginRegister = () => {
 
     const signup = (e) => {
         e.preventDefault();
+
+        if (!emailRegEx.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        };
+        if (!passwordRegEx.test(password)) {
+            alert('Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one digit.');
+            return;
+        };
+        if (password !== passwordConfirmation){
+            alert('Passwords entered do not match.');
+            return;
+        }
         
         const endpoint = `${baseURL}auth`
         const method = 'POST'
@@ -52,7 +73,7 @@ const LoginRegister = () => {
         fetch(endpoint, { method, headers, body })
             .then(response => {
                 if(response.status == 200){
-                    alert('signup succesful');
+                    alert('Congratulations! You may now login with your registered email.');
                     setIsLoginVisible(true);
                     setEmail('');
                     setPassword('');

@@ -22,25 +22,6 @@ function Header(){
   )
 }
 
-function BottomNav(){
-  return(
-    <div className='bottom-nav'>
-        <button className='bottom-btn'><i className='fas fa-home' style={{color: '#eaebea'}}></i>Home</button>
-        <button className='bottom-btn'><i className='fas regular fa-envelope' style={{color: '#eaebea'}}></i>DMs</button>
-        <button className='bottom-btn'><i className='fas regular fa-user' style={{color: '#eaebea'}}></i>Profile</button>
-    </div>
-  )
-}
-
-function MainPage() {
-  return(
-    <div className='main'>
-      <Header />
-      <BottomNav />
-      
-    </div>
-  )
-}
 
 function App() {
   const [session, setSession] = useSession(null);
@@ -56,10 +37,9 @@ function App() {
 
   return (
     <>
-    {/*<MainPage />*/}
       <Header />
       <SessionContext.Provider value={ {session, setSession} }>
-        {session ? <Main/> : <LoginRegister/>}
+        {session ? <Main /> : <LoginRegister />}
       </SessionContext.Provider>
     </>
   );
