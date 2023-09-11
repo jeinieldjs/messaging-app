@@ -2,26 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import LoginRegister from './components/LoginRegister'
 import Main from './components/Main'
-import axios from 'axios';
 import SessionContext, { useSession } from './contexts/SessionContext'
-
-const Logo = () => {
-  return(
-  <div className='logo'>
-    <h1>💬APP<span style={{color:'#d8323c'}}>NAME</span></h1>
-  </div>
-  )
-}
-
-const Header = () => {
-  return(
-  <div className='header'>
-    <Logo />
-  </div>
-
-  )
-}
-
 
 function App() {
   const [session, setSession] = useSession(null);
