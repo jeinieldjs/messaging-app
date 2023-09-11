@@ -116,3 +116,11 @@ body {
   font-size:1.5rem;
   padding-bottom:3px;
 }
+
+.sidenav {
+  background-color: #0c0e0c;
+  color: #eaebea;
+  width: 20%;
+  height: 100vh;
+  left: 0;
+}

@@ -5,7 +5,7 @@ import Main from './components/Main'
 import axios from 'axios';
 import SessionContext, { useSession } from './contexts/SessionContext'
 
-function Logo() {
+const Logo = () => {
   return(
   <div className='logo'>
     <h1>💬APP<span style={{color:'#d8323c'}}>NAME</span></h1>
@@ -13,7 +13,7 @@ function Logo() {
   )
 }
 
-function Header(){
+const Header = () => {
   return(
   <div className='header'>
     <Logo />
@@ -37,7 +37,6 @@ function App() {
 
   return (
     <>
-      <Header />
       <SessionContext.Provider value={ {session, setSession} }>
         {session ? <Main /> : <LoginRegister />}
       </SessionContext.Provider>

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import SessionContext from "../contexts/SessionContext";
+import Header from './HeaderLogo';
 
 const LoginRegister = () => {
     const baseURL = 'http://206.189.91.54/api/v1/';
@@ -27,7 +28,7 @@ const LoginRegister = () => {
 
         fetch(endpoint, { method, headers, body })
             .then(response => {
-                if(response.status == 200){
+                if(response.status === 200){
                     setSession({
                         accessToken: response.headers.get('access-token'),
                         client: response.headers.get('client'),
@@ -72,7 +73,7 @@ const LoginRegister = () => {
 
         fetch(endpoint, { method, headers, body })
             .then(response => {
-                if(response.status == 200){
+                if(response.status === 200){
                     alert('Congratulations! You may now login with your registered email.');
                     setIsLoginVisible(true);
                     setEmail('');
@@ -90,6 +91,7 @@ const LoginRegister = () => {
 
     return (
         <>
+        <Header />
         {isLoginVisible ? (
             <div id='log-form'>
                 <label className='input-label'>E-mail:</label>
