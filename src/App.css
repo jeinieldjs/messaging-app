@@ -81,19 +81,6 @@ body {
 .main{
   min-width: 400px;
 }
-.bottom-nav {
-  background-color: #0c0e0c;
-  color:#eaebea;
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 5px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-}
 
 .bottom-btn {
   color: #eaebea;
@@ -102,7 +89,9 @@ body {
   padding: 5px;
   display:flex;
   flex-direction: column;
-  align-items: center;;
+  align-items: center;
+  position: absolute;
+  bottom: 1%;
 }
 
 .bottom-btn:hover{
@@ -123,4 +112,43 @@ body {
   width: 20%;
   height: 100vh;
   left: 0;
+}
+.sidenav h1{
+  font-size:1rem;
+}
+.add-channel-line {
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+}
+.add-channel-btn{
+  font-size:1rem;
+  background-color: transparent;
+  border: none;
+  margin-right: 5px;
+}
+.add-channel-btn:hover, .add-channel-line:hover {
+  background-color: #d8323dad;
+}
+
+.sidenav-label{
+  font-size: 1rem;
+}
+
+.users-list{
+  color: #eaebea;
+  font-size: 0.8rem;
+}
+
+.logged-user-container {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2rem;
+  justify-content: center;
+  padding: 10px 0px 10px 0px;
+}
+
+.logged-user-container i{
+  margin-right: 5px;
 }

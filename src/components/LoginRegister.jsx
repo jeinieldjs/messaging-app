@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import SessionContext from "../contexts/SessionContext";
+import SessionContext from '../contexts/SessionContext';
 import Header from './HeaderLogo';
 
 const LoginRegister = () => {
@@ -33,7 +33,8 @@ const LoginRegister = () => {
                         accessToken: response.headers.get('access-token'),
                         client: response.headers.get('client'),
                         uid: response.headers.get('uid'),
-                        expiry: response.headers.get('expiry')
+                        expiry: response.headers.get('expiry'),
+                        email: email
                     })
                 } else if (response.status === 404) {
                     alert('Email is not registered.');
