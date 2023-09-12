@@ -11,6 +11,10 @@ const Sidenav = () => {
     localStorage.setItem('chat', JSON.stringify(null))
    } 
    const loggedEmail = session.email;
+   const [searchQuery, setSearchQuery] = useState('');
+   const handleSearchChange = (e) => {
+     setSearchQuery(e.target.value);
+   }
 
 return (
     <>
@@ -28,8 +32,13 @@ return (
                 </span>
             </div>
             <div className='dm-container'>
-                 <h1 className='sidenav-label'>Direct Messages</h1>
-                {/* <Users />*/}
+                <h1 className='sidenav-label'>Direct Messages</h1>
+                <div className='search-bar'>
+                  <input type='text' placeholder='Search Users' id='user-search' value={searchQuery} onChange={handleSearchChange} />
+                </div>
+                 <div className="user-list-container">
+                     <Users searchQuery={searchQuery} />
+                 </div>
             </div>
             <div className='logout-container'>
                 <button className='bottom-btn'>

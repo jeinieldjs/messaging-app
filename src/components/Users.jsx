@@ -1,12 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import SessionContext from '../contexts/SessionContext';
 import ChatContext from '../contexts/ChatContext';
+import '../App.css';
 
 
-const Users = () => {
+const Users = ({ searchQuery }) => {
   const { session } = useContext(SessionContext);
   const { chat, setChat } = useContext(ChatContext);
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   const fetchUsers = async () => {
     const endpoint = 'http://206.189.91.54/api/v1/users';
@@ -22,7 +24,9 @@ const Users = () => {
     const response = await fetch(endpoint, { method, headers });
     const result = await response.json();
 
-    setUsers(result.data.sort((a, b) => { return a.uid < b.uid ? -1 : 1 }));
+    const sortedUsers = result.data.sort((a, b) => (a.uid < b.uid ? -1 : 1));
+    setUsers(sortedUsers);
+    setFilteredUsers(sortedUsers);
   };
 
   useEffect(() => {
@@ -37,16 +41,33 @@ const Users = () => {
     });
   };
 
+  useEffect(() => {
+    if (!searchQuery) {
+      setFilteredUsers(users); 
+    } else {
+      const filtered = users.filter((user) =>
+        user.uid.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredUsers(filtered);
+    }
+  }, [searchQuery, users]);
+
   return (
     <>
       <ul className='users-list'>
-        {users && users.map(user => {
-          return (
-            <li key={user.id}>
-              <a href='#' data-id={user.id} data-name={user.uid} data-type={'User'} onClick={selectUser}>{user.uid}</a>
-            </li>
-          );
-        })}
+        {filteredUsers.map((user) => (
+          <li key={user.id} className='indiv-users'>
+            <a
+              href='#'
+              data-id={user.id}
+              data-name={user.uid}
+              data-type={'User'}
+              onClick={selectUser}
+            >
+              {user.uid}
+            </a>
+          </li>
+        ))}
       </ul>
     </>
   );

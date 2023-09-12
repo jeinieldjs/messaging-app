@@ -207,6 +207,93 @@ body {
 #submit-chat i{
  font-size: 4rem;
 }
+
 #submit-chat:hover {
   background-color:#d8323d7c;
+}
+
+.user-list-container {
+  max-height: 300px;
+  overflow: auto;
+  padding: 10px;
+}
+.indiv-users a {
+  color: #eaebea;
+  text-decoration: none;
+  font-size: 1rem;
+  padding:5px;
+}
+#user-search{
+  width: 80%;
+  height: 2rem;
+  border: none;
+  border-radius: 20px;
+  background-color: rgba(53, 49, 49, 0.692);
+  padding: 5px;
+  text-align:center;
+  margin: 10px 0px 5px 0px;
+  color: white;
+ 
+}
+#user-search:focus{
+  outline: none;
+}
+#user-search::placeholder{
+  color: white;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#message-container {
+  width: 70%;
+  height: 70%;
+  overflow: scroll;
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  border-radius: 10px;
+}
+.message:hover {
+  background-color: #d8323d60;
+}
+.initial-container {
+  height:1.7rem;
+  width:1.7rem;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  font-weight:800;
+  color:#eaebea;
+  background-color: #d8323c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.message-time {
+  color: #d8323c;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+.actual-message{
+  padding: 5px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.sender-details {
+  display: flex;
+  flex-direction: row;
+  max-width: 20%;
+}
+.right-side-deets {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 5px;
+}
+.sender-eadd {
+  font-weight: 700;
 }
