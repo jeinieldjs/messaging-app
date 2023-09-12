@@ -17,7 +17,7 @@ const ChatField = () => {
             <ChatTitle />
             <div className='text-field'>
                 <textarea className='chat-input' rows='5' cols='50'> </textarea>
-                <button id='submit-chat'><i className="fas fa-paper-plane" style={{color: '#eaebea'}}></i></button>
+                <button id='submit-chat'><i className="fas fa-paper-plane" style={{color: '#eaebea'}}></i>SEND</button>
             </div>
         </>
     )
