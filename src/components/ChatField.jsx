@@ -5,12 +5,12 @@ import ChatContext from '../contexts/ChatContext';
 import { MessageContext } from '../contexts/MessageContext';
 
 
-const ChatTitle = () => {
+const ChatTitle = ({receiverName}) => {
     
     return (
         <div className='chat-title'>
-            <h1 className='chat-label'>*Name of channel or kachat*</h1>
-        </div>
+            <h1 className='chat-label'>{receiverName}</h1>
+         </div>
     )
 }
 
@@ -166,7 +166,7 @@ const ChatField = () => {
     
     return (
         <>
-            <ChatTitle />
+            <ChatTitle receiverName={chat.name}/>
             <MessageDisplay />
             <SendMessage />
             

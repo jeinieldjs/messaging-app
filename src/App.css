@@ -209,7 +209,7 @@ body {
 }
 
 #submit-chat:hover {
-  background-color:#d8323d7c;
+  background-color: rgba(128, 16, 16, 0.716);
 }
 
 .user-list-container {
