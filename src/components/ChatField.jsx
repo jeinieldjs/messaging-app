@@ -20,6 +20,7 @@ const MessageDisplay = () => {
     const { messages, setMessages } = useContext(MessageContext);
     const [toggleMessage, setToggleMessage] = useState(false);
     const scrollRef = useRef(null);
+   
 
     const fetchMessages = () => {
         const endpoint = `http://206.189.91.54/api/v1/messages?receiver_id=${chat.id}&receiver_class=${chat.type}`;
@@ -124,9 +125,9 @@ const SendMessage =(props) => {
             })
             .then((data) => {
                 console.log('message sent');
-                console.log(data.data[0]);
+                setMessage('');
                 setToggleMessage(!toggleMessage);
-                setMessage(''); 
+               
             })
             .catch((error) => {
                 console.log(error);
@@ -140,6 +141,7 @@ const SendMessage =(props) => {
         if (event.key === 'Enter'){
             event.preventDefault();
             sendMessage(event);
+            setMessage('');
         }
     };
     
