@@ -126,7 +126,7 @@ const SendMessage =(props) => {
                 console.log('message sent');
                 console.log(data.data[0]);
                 setToggleMessage(!toggleMessage);
-                setMessage('');
+                setMessage(''); 
             })
             .catch((error) => {
                 console.log(error);
@@ -135,6 +135,13 @@ const SendMessage =(props) => {
     const handleInputChange = (event) => {
         setMessage(event.target.value);
       };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter'){
+            event.preventDefault();
+            sendMessage(event);
+        }
+    };
     
 
     return (
@@ -144,7 +151,8 @@ const SendMessage =(props) => {
                     rows='5' 
                     cols='50'
                     value={message}
-                    onChange={handleInputChange}> 
+                    onChange={handleInputChange} 
+                    onKeyDown={handleKeyDown}>
                 </textarea>
                 <button 
                     id='submit-chat' 
