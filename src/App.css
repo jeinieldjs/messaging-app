@@ -255,6 +255,8 @@ body {
   top: 10%;
   left: 25%;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 .message:hover {
   background-color: #d8323d60;
@@ -282,18 +284,27 @@ body {
   padding: 5px;
   font-size: 1.2rem;
   font-weight: 700;
+  margin-left: 35px;
+
 }
 .sender-details {
   display: flex;
   flex-direction: row;
-  max-width: 20%;
+
 }
 .right-side-deets {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   padding: 5px;
+  align-items: flex-end;
 }
 .sender-eadd {
   font-weight: 700;
+}
+
+.sender-details.sent-message {
+  background-color: transparent;
+}
+.sent-message{
+  background-color:#d8323d67;
 }

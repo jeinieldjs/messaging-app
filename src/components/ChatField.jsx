@@ -59,9 +59,12 @@ const MessageDisplay = () => {
                  <div id = 'message-container' ref={scrollRef}>
                 {messages && messages.map((message, index) => {
                     const initial = (JSON.stringify(message.sender.email)[1]).toUpperCase();
+                    const isSentByLoggedUser = message.sender.email === session.email;
+                    const messageClass = isSentByLoggedUser ? 'sent-message' : 'received-message';
+                  
                     return (
-                        <div className='message' key={'message_' + message.id}>
-                            <div className='sender-details'>
+                        <div className={`message ${messageClass}`} key={'message_' + message.id}>
+                            <div className={`sender-details ${messageClass}`}>
                                 <div className='initial-container'>
                                     <span className='user-initial'>{initial}</span>
                                 </div>
