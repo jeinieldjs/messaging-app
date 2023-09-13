@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import '../App.css';
 import SessionContext from '../contexts/SessionContext';
 import Users from './Users.jsx';
+import CreateChannel from './CreateChannel';
 
 const Sidenav = () => {
    const { session, setSession } = useContext(SessionContext)
@@ -24,12 +25,7 @@ return (
             </div>
             <div className='channel-container'>
                 <h1 className='sidenav-label'>Channels</h1>
-                <span className='add-channel-line'>
-                    <button className='add-channel-btn'>
-                        <i className='fas fa-plus-square' style={{color: '#eaebea'}}></i>
-                    </button>
-                    <p>Add Channel</p>
-                </span>
+                <div className='channel-list-container'><CreateChannel /></div> {/*render add channel button below the channel list*/}
             </div>
             <div className='dm-container'>
                 <h1 className='sidenav-label'>Direct Messages</h1>
