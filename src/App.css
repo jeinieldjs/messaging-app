@@ -308,3 +308,26 @@ body {
 .sent-message{
   background-color:#d8323d67;
 }
+
+#message-container::-webkit-scrollbar ,
+.user-list-container::-webkit-scrollbar   {
+  width: 7px;
+  height: 7px;
+}
+
+#message-container::-webkit-scrollbar-thumb,
+.user-list-container::-webkit-scrollbar-thumb {
+  background-color: #d8323c;
+  border-radius: 5px; 
+}
+
+#message-container::-webkit-scrollbar-track:hover,
+.user-list-container::-webkit-scrollbar-track:hover {
+  background-color: transparent; 
+}
+
+#message-container::-webkit-scrollbar-thumb:horizontal, 
+.user-list-container::-webkit-scrollbar-thumb:horizontal {
+  background-color: #d8323c;
+  border-radius: 5px;
+}
