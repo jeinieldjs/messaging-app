@@ -32,13 +32,14 @@ function CreateChannel(props) {
     fetch(endpoint, { method, headers, body })
     .then((response) => {
       if (response.status === 200) {
+        console.log('channel created');
         return response.json();
       } else {
         console.log('failed');
       }
     })
     .then((data) => {
-      console.log(data)
+      //console.log(data)
       const newChannels = [...channels];
       setChannels(newChannels);
     })
@@ -184,7 +185,7 @@ const fetchChannels = (setChannels, session) => {
     })
     .then((result) => {
       setChannels(result.data);
-      console.log(result);
+      //console.log(result);
     })
     .catch((error) => {
       console.log(`Error:${error}`);
@@ -226,23 +227,27 @@ export const ChannelDisplay = (props) => {
 
   return (
     <div className='channel-list'>
-      <ul >
-        {channels && channels.map((channel) => {
-            return (
-              <li key={"channel_" + channel.id}>
-                <a
-                  href='#'
-                  data-id={channel.id}
-                  data-name={channel.name}
-                  data-type={'Channel'}
-                  onClick={selectChannel}
-                >
-                  #  {formatChannelName(channel.name)}
-                </a>
-              </li>
-            );
-          })}
-      </ul>
+     <ul>
+    {channels && [...channels] 
+        .sort((a, b) => {
+          const nameA = a.name ? a.name.toUpperCase() : "";
+          const nameB = b.name ? b.name.toUpperCase() : "";
+          return nameA.localeCompare(nameB);
+        })
+        .map((channel) => (
+          <li key={"channel_" + channel.id}>
+            <a
+              href='#'
+              data-id={channel.id}
+              data-name={channel.name}
+              data-type={'Channel'}
+              onClick={selectChannel}
+            >
+              # {formatChannelName(channel.name)}
+            </a>
+          </li>
+        ))}
+  </ul>
     </div>
   );
 };

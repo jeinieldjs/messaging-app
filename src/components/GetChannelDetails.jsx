@@ -153,14 +153,22 @@ export default function ChannelDetails() {
           <div className='member-container'>
             <h3 style={{textAlign:'left'}}>Channel Members: </h3>
             <ul className='member-list'>
-            {channel && channel.channel_members.map((member) => {
-              const user = users.find((user) => { return user.value === member.user_id; });
-
-              return (
-                <li>{user && user.label}</li>
-              );
-            })}
-            </ul>
+              {channel && channel.channel_members
+        .map((member) => {
+          const user = users.find((user) => user.value === member.user_id);
+          return { user, member }; 
+        })
+        .sort((a, b) => {
+          const nameA = a.user && a.user.label ? a.user.label.toUpperCase() : "";
+          const nameB = b.user && b.user.label ? b.user.label.toUpperCase() : "";
+          return nameA.localeCompare(nameB);
+        })
+        .map((sortedMember) => (
+          <li key={sortedMember.member.user_id}>
+            {sortedMember.user && sortedMember.user.label}
+          </li>
+        ))}
+           </ul>
           </div>
         </div>
       </div>

@@ -422,12 +422,13 @@ body {
 }
 
 .channel-list {
- max-height: 300px;
+ max-height: 200px;
  overflow: scroll;
 }
 .channel-list li a{
   color: #eaebea;
   list-style: none;
+  text-decoration: none;
 }
 .channel-list li a:hover{
   color: #d8323c;
