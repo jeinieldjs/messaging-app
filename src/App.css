@@ -116,6 +116,8 @@ body {
 }
 .sidenav h1{
   font-size:1rem;
+  padding: 10px;
+  text-align: center;
 }
 .add-channel-line {
   font-size: 1rem;
@@ -320,24 +322,28 @@ body {
 }
 
 #message-container::-webkit-scrollbar ,
-.user-list-container::-webkit-scrollbar   {
+.user-list-container::-webkit-scrollbar, 
+.channel-list::-webkit-scrollbar     {
   width: 7px;
   height: 7px;
 }
 
 #message-container::-webkit-scrollbar-thumb,
-.user-list-container::-webkit-scrollbar-thumb {
+.user-list-container::-webkit-scrollbar-thumb,
+.channel-list::-webkit-scrollbar-thumb {
   background-color: #d8323c;
   border-radius: 5px; 
 }
 
 #message-container::-webkit-scrollbar-track:hover,
-.user-list-container::-webkit-scrollbar-track:hover {
+.user-list-container::-webkit-scrollbar-track:hover,
+.channel-list::-webkit-scrollbar-track:hover {
   background-color: transparent; 
 }
 
 #message-container::-webkit-scrollbar-thumb:horizontal, 
-.user-list-container::-webkit-scrollbar-thumb:horizontal {
+.user-list-container::-webkit-scrollbar-thumb:horizontal,
+.channel-list::-webkit-scrollbar-thumb:horizontal {
   background-color: #d8323c;
   border-radius: 5px;
 }
@@ -412,21 +418,19 @@ body {
 
 .modal-labels{
   font-size: 1rem; 
-}
-.channel-display {
-  max-height: 200px;
-  overflow: auto;
+  text-align: left;
 }
 
-.channel-display a{
+.channel-list {
+ max-height: 300px;
+ overflow: scroll;
+}
+.channel-list li a{
   color: #eaebea;
   list-style: none;
 }
-.channel-display a:hover{
+.channel-list li a:hover{
   color: #d8323c;
-}
-.channel-list-container {
-  border: solid 2px blue;
 }
 
 .add-member-modal {
@@ -435,4 +439,35 @@ body {
   max-width: 400px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.add-new-member {
+  width: 300px;
+}
+.member-container {
+  padding-top: 10px;
+}
+.member-container li{
+  list-style: none;
+  color: #d8323c;
+}
+.show-details-btn{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color:#eaebea;
+  border: none;
+  
+}
+.i-wrapper{
+  background-color: #d8323c;
+  border-radius: 50%;
+  height: 30px;
+  width:30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 2rem;
+ 
 }

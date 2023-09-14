@@ -115,25 +115,23 @@ export default function ChannelDetails() {
       <div id='channel-details-container'>
       <button 
         className='show-details-btn'
-        onClick={toggleModal}
-      >
-      Channel Details
+        onClick={toggleModal}>
+          <div className='i-wrapper'>i</div>
       </button>
     </div>
     {showModal && (
       <div className='modal-overlay'>
-        <div className='channel-modal'>
+        <div className='add-member-modal'>
           <div className='modal-header'>
-            <h3 className='modal-label'>
+            <h2 style={{textTransform:'uppercase'}}>
               Channel Details
-            </h3>
+            </h2>
             <button
               className='close-modal'
               onClick={toggleModal}
             >X</button>
           </div>
           <div className="channel-member-select">
-            <label className='modal-labels'>Add Members</label>
             {channel && channel.channel_members ?
               <ReactSelect
                 options={users.filter(user => !channel.channel_members.some((member) => member.user_id === user.value))}
@@ -142,17 +140,18 @@ export default function ChannelDetails() {
                 components={{Option}}
                 onChange={handleChange}
                 value={optionSelected}
+                className='add-new-member'
               /> : null}
           </div>
           <div className='modal-bottom'>
             <button
-              className='add-user-button'
+              className='create-button'
               onClick={handleAddUser}>
-              Add
+              Add Member
             </button>
           </div>
           <div className='member-container'>
-            <h5>Channel Members: </h5>
+            <h3 style={{textAlign:'left'}}>Channel Members: </h3>
             <ul className='member-list'>
             {channel && channel.channel_members.map((member) => {
               const user = users.find((user) => { return user.value === member.user_id; });
