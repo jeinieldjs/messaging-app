@@ -3,8 +3,9 @@ import '../App.css';
 import SessionContext from '../contexts/SessionContext';
 import Users from './Users.jsx';
 import CreateChannel from './CreateChannel';
+import { ChannelDisplay } from './CreateChannel';
 
-const Sidenav = () => {
+const Sidenav = (props) => {
    const { session, setSession } = useContext(SessionContext)
    const logout = (e) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ const Sidenav = () => {
    const handleSearchChange = (e) => {
      setSearchQuery(e.target.value);
    }
+   const {channels, setChannels} = props
 
 return (
     <>
@@ -24,11 +26,14 @@ return (
                 <h3><i className='fas fa-user-circle' style={{ color: '#eaebea' }}></i>{loggedEmail}</h3>
             </div>
             <div className='channel-container'>
-                <h1 className='sidenav-label'>Channels</h1>
-                <div className='channel-list-container'><CreateChannel /></div> {/*render add channel button below the channel list*/}
+                <h1 className='sidenav-label'>⮟ Channels</h1>
+                <div className='channel-list-container'>
+                    <ChannelDisplay channels={channels} setChannels={setChannels}/>
+                    <CreateChannel channels={channels} setChannels={setChannels}/>
+                </div>
             </div>
             <div className='dm-container'>
-                <h1 className='sidenav-label'>Direct Messages</h1>
+                <h1 className='sidenav-label'>⮟ Direct Messages</h1>
                 <div className='search-bar'>
                   <input type='text' placeholder='Search Users' id='user-search' value={searchQuery} onChange={handleSearchChange} />
                 </div>

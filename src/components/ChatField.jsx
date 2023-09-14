@@ -3,16 +3,9 @@ import '../App.css';
 import SessionContext from '../contexts/SessionContext';
 import ChatContext from '../contexts/ChatContext';
 import { MessageContext } from '../contexts/MessageContext';
+import ChatTitle from './ChatTitle';
 
 
-const ChatTitle = ({receiverName}) => {
-    
-    return (
-        <div className='chat-title'>
-            <h1 className='chat-label'>{receiverName}</h1>
-         </div>
-    )
-}
 
 const MessageDisplay = () => {
     const { session } = useContext(SessionContext);
@@ -179,7 +172,7 @@ const ChatField = () => {
     
     return (
         <>
-            <ChatTitle receiverName={chat.name}/>
+             <ChatTitle chat={chat} receiverName={chat.name} />
             <MessageDisplay />
             <SendMessage />
             

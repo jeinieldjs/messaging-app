@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import SessionContext from "../contexts/SessionContext";
 import ChatContext from '../contexts/ChatContext';
-import { MessageContext } from '../contexts/MessageContext';
-import ReactSelect, { components } from "react-select";
+import  {MessageContext}  from '../contexts/MessageContext';
+import ReactSelect, {components} from "react-select";
 
 function CreateChannel(props) {
   const { session } = useContext(SessionContext);
@@ -30,24 +30,24 @@ function CreateChannel(props) {
     const body = JSON.stringify({ name: channelName, user_ids: userIds });
 
     fetch(endpoint, { method, headers, body })
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          console.log('failed');
-        }
-      })
-      .then((data) => {
-        const newChannels = [...channels];
-        newChannels.push(data);
-        setChannels(newChannels);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        console.log('failed');
+      }
+    })
+    .then((data) => {
+      console.log(data)
+      const newChannels = [...channels];
+      setChannels(newChannels);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
-    setShowModal(false);
-  };
+  setShowModal(false);
+};
 
   const fetchUsers = async () => {
     const endpoint = 'http://206.189.91.54/api/v1/users';
@@ -96,7 +96,7 @@ function CreateChannel(props) {
       </div>
     );
   };
-  
+
   const toggleModal = () => {
     setShowModal(!showModal);
   };
@@ -139,18 +139,13 @@ function CreateChannel(props) {
           <div className="channel-member-select">
             <label className='modal-labels'>Add Members</label>
               <ReactSelect
-                options={users.filter(
-                  (user) =>
-                    !channel.channel_members.some(
-                      (member) => member.user_id === user.value
-                    )
+                options={users.filter((user) =>
+                    !channel.channel_members.some((member) => member.user_id === user.value)
                 )}
                 isMulti
                 closeMenuOnSelect={false}
                 hideSelectedOptions={false}
-                components={{
-                  Option,
-                }}
+                components={{Option}}
                 onChange={handleChange}
                 value={optionSelected}
               />
@@ -169,5 +164,87 @@ function CreateChannel(props) {
   </>
   );
 }
+
+const fetchChannels = (setChannels, session) => {
+  const endpoint = 'http://206.189.91.54/api/v1/channels';
+  const method = 'GET';
+  const headers = {
+    'Content-Type': 'application/json',
+    'access-token': session.accessToken,
+    'client': session.client,
+    'expiry': session.expiry,
+    'uid': session.uid,
+  };
+
+  fetch(endpoint, { method, headers })
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      }
+    })
+    .then((result) => {
+      setChannels(result.data);
+      console.log(result);
+    })
+    .catch((error) => {
+      console.log(`Error:${error}`);
+    });
+};
+
+export const ChannelDisplay = (props) => {
+  const { session } = useContext(SessionContext);
+  const { channels, setChannels } = props;
+  const { setMessages } = useContext(MessageContext);
+  const { chat, setChat } = useContext(ChatContext); 
+  
+
+  const selectChannel = (event) => {
+    setChat({
+      id: event.target.getAttribute('data-id'),
+      name: event.target.getAttribute('data-name'),
+      type: event.target.getAttribute('data-type'),
+    });
+  };
+
+  useEffect(() => {
+    fetchChannels(setChannels, session);
+
+    if (!chat && channels && channels.length > 0) {
+      setChat({
+        id: channels[0].id,
+        name: channels[0].name,
+        type: 'Channel',
+      });
+    }
+  }, [channels]);
+
+  useEffect(() => {
+    fetchChannels(setChannels, session);
+  }, []);
+  //console.log(channels);
+
+  return (
+    <div>
+      <ul className='channel-list'>
+        {channels &&
+          channels.map((channel) => {
+            return (
+              <li key={"channel_" + channel.id}>
+                <a
+                  href='#'
+                  data-id={channel.id}
+                  data-name={channel.name}
+                  data-type={'Channel'}
+                  onClick={selectChannel}
+                >
+                  # {channel.name}
+                </a>
+              </li>
+            );
+          })}
+      </ul>
+    </div>
+  );
+};
 
 export default CreateChannel;

@@ -9,6 +9,7 @@ import ChatContext, {usePersistedChat} from '../contexts/ChatContext';
 const Main = () => {
     const [chat, setChat] = usePersistedChat(null);
     const [messages, setMessages] = useState([]);
+    const [channels, setChannels] = useState([]);
 
     return (
         <>
@@ -17,7 +18,7 @@ const Main = () => {
                 <div>
                     <div>
                         <MessageContext.Provider value={{ messages, setMessages }}>
-                            <Sidenav />
+                            <Sidenav channels={channels} setChannels={setChannels} />
                             {chat ? <ChatField /> : null}
                         </MessageContext.Provider>
                     </div>
