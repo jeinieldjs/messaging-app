@@ -163,7 +163,7 @@ function CreateChannel(props) {
     )}
   </>
   );
-}
+};
 
 const fetchChannels = (setChannels, session) => {
   const endpoint = 'http://206.189.91.54/api/v1/channels';
@@ -196,6 +196,7 @@ export const ChannelDisplay = (props) => {
   const { channels, setChannels } = props;
   const { setMessages } = useContext(MessageContext);
   const { chat, setChat } = useContext(ChatContext); 
+  const formatChannelName = (name) => name.replace(/ /g, '-');
   
 
   const selectChannel = (event) => {
@@ -224,10 +225,9 @@ export const ChannelDisplay = (props) => {
   //console.log(channels);
 
   return (
-    <div>
-      <ul className='channel-list'>
-        {channels &&
-          channels.map((channel) => {
+    <div className='channel-list'>
+      <ul >
+        {channels && channels.map((channel) => {
             return (
               <li key={"channel_" + channel.id}>
                 <a
@@ -237,7 +237,7 @@ export const ChannelDisplay = (props) => {
                   data-type={'Channel'}
                   onClick={selectChannel}
                 >
-                  # {channel.name}
+                  #  {formatChannelName(channel.name)}
                 </a>
               </li>
             );
