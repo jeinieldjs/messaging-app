@@ -10,35 +10,62 @@ body {
   color: #0c0e0c;
   min-width: 400px;
 }
-
+#icon-container{
+  height: 200px;
+  width: 200px;
+}
+#icon-container img{
+  height: 90%;
+}
 .header {
-  background-color: #0c0e0c;
-  color: #eaebea;
+  background-color: transparent;
+  color: black;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content:center;
   padding: 10px;
+  width: 100%;
 }
-
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
 .log-input {
   width: 300px;
   height: 2rem;
-  border-radius: 10px;
   padding: 5px; 
   color:#d8323c;
   font-weight: 500;
+  border: none;
+  border-bottom: solid 1px #d8323c;
+  background-color: transparent;
 }
-
+.log-input:focus{
+  outline: none;
+}
+#form-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  padding-bottom: 40px;
+}
 #log-form, #reg-form {
-  border: solid #d8323c 3px;
-  border-radius: 10px;
+ /* border: solid #d8323c 3px; */
+  border-radius: 5px;
   padding: 20px;
   width: 350px;
   margin: auto;
-  margin-top: 5%;
+  margin-top: 3%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: white;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
  
 }
 
@@ -53,22 +80,22 @@ body {
   font-size: 0.8rem;
   text-align: center;
   padding-bottom: 15px;
+  padding-top: 40px;
 }
 
 #log-button {
   font-size: 1rem;
   padding: 5px;
   margin: auto;
-  width: 100px;
+  width: 90%;
   border-radius: 20px;
-  border: solid 2px #0c0e0c;
-  background-color: #eaebeaa3;
+  border: none;
+  background-color: #d8323c;
+  color:#eaebea
 }
 
 #log-button:hover {
-  color: #eaebea;
   background-color: #d8323dad;
-  border: solid 2px #d8323c;
 }
 
 .form-link{

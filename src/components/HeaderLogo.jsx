@@ -1,18 +1,28 @@
 import React from 'react';
 import '../App.css';
 
-const Logo = () => {
+export const AppName = () => {
     return(
-    <div className='logo'>
-      <h1>💬APP<span style={{color:'#d8323c'}}>NAME</span></h1>
+    <div className='greeting'>
+      <h1>CLUCK<span style={{color:'#d8323c'}}>APP</span></h1>
     </div>
     )
   }
   
+ const Icon = () => {
+  return (
+    <div id='icon-container'>
+      <img
+        id='icon-logo' 
+        src='https://icons.veryicon.com/png/o/food--drinks/fresh-3/fresh-chicken.png'></img>
+    </div>
+  )
+ }
  const Header = () => {
     return(
     <div className='header'>
-      <Logo />
+      <Icon />
+      <h1>Welcome to <AppName /></h1>
     </div>
   
     )

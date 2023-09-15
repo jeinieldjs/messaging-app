@@ -91,14 +91,31 @@ const LoginRegister = () => {
  
 
     return (
-        <>
+        <div className='landing-page'>
         <Header />
         {isLoginVisible ? (
             <div id='log-form'>
+                <div id='form-title'>
+                    <h1>LOGIN</h1>
+                </div>
+              
                 <label className='input-label'>E-mail:</label>
-                <input type='email' name='log-email' id='log-emailInput' value={email} className='log-input' onChange={event => setEmail(event.target.value)} />
+                <input type='email' 
+                    name='log-email' 
+                    id='log-emailInput' 
+                    placeholder='✉ Type your email' 
+                    value={email} 
+                    className='log-input' 
+                    onChange={event => setEmail(event.target.value)} />
                 <label for="log-password" className='input-label'>Password:</label>
-                <input type='password' name='log-password' id='log-passwordInput' value={password} className='log-input' onChange={e => setPassword(e.target.value)} /><br />
+                <input type='password' 
+                    name='log-password' 
+                    id='log-passwordInput' 
+                    placeholder='🗝 Type your password'
+                    value={password} 
+                    className='log-input'
+                    onChange={e => setPassword(e.target.value)} />
+                    <br />
                 <p id='log-note'>
                 Not yet registered? <button onClick={handleSignUpClick  } className='form-link'>SIGN-UP</button>.
                 </p>
@@ -106,12 +123,30 @@ const LoginRegister = () => {
             </div>
           ) : (
             <div id='reg-form'>
+                <div id='form-title'>
+                    <h1>SIGN UP</h1>
+                </div>
                 <label for="reg-email" className='input-label'>E-mail:</label>
-                <input type='text' name='reg-email' id='reg-emailInput' className='log-input' onChange={event => setEmail(event.target.value)} />
+                <input type='text' 
+                    name='reg-email' 
+                    id='reg-emailInput' 
+                    className='log-input' 
+                    placeholder='✉ Type your email'
+                    onChange={event => setEmail(event.target.value)} />
                 <label for="reg-password" className='input-label'>Password:</label>
-                <input type='password' name='reg-password' id='reg-passwordInput' className='log-input' onChange={e => setPassword(e.target.value)} />
+                <input type='password' 
+                    name='reg-password' 
+                    id='reg-passwordInput' 
+                    className='log-input' 
+                    placeholder="🗝 Type your password"
+                    onChange={e => setPassword(e.target.value)} />
                 <label for="reg-confirmpassword" className='input-label'>Confirm password:</label>
-                <input type='password' name='reg-confirmpassword' id='reg-confirmpasswordInput' className='log-input' onChange={e => setPasswordConfirmation(e.target.value)} /><br />
+                <input type='password' 
+                    name='reg-confirmpassword' 
+                    id='reg-confirmpasswordInput' 
+                    className='log-input' 
+                    placeholder='🗝Type your password again'
+                    onChange={e => setPasswordConfirmation(e.target.value)} /><br />
                 <p id='log-note'>
                     Already registered? <button onClick={handleLoginClick} className='form-link'>LOGIN</button>.
                 </p>
@@ -119,7 +154,7 @@ const LoginRegister = () => {
         
             </div>
           )}
-        </>
+        </div>
     )
 }
 
