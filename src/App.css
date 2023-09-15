@@ -273,9 +273,8 @@ body {
 .initial-container {
   height:1.7rem;
   width:1.7rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-radius: 50%;
-  font-weight:800;
   color:#eaebea;
   background-color: #d8323c;
   display: flex;
@@ -283,6 +282,11 @@ body {
   justify-content: center;
   margin-top: 5px;
   margin-left: 5px;
+  padding: 5px;
+}
+.user-initial{
+  text-align: center;
+  font-weight: bold;
 }
 .message-time {
   color: #d8323c;
@@ -385,15 +389,19 @@ body {
 }
 
 .close-modal {
-  color: #d8323c;
+  background-color: #d8323c;
+  color: #eaebea;
   border-radius: 50%;
-  border: 1px solid #d8323c;
+  border: none;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: bold;
   padding:2px;
+  font-family: 'Arial';
 }
-
+.close-modal:hover{
+  background-color: #d8323d67;
+}
 .modal-content {
   margin-bottom: 15px;
   display: flex;
@@ -443,6 +451,10 @@ body {
 }
 .add-new-member {
   width: 300px;
+  text-align:left;
+}
+.add-new-member:focus{
+  outline: none;
 }
 .member-container {
   padding-top: 10px;

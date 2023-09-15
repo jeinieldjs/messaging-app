@@ -3,8 +3,10 @@ import SessionContext from "../contexts/SessionContext";
 import ChatContext from '../contexts/ChatContext';
 import ReactSelect, { components } from "react-select";
 
+const baseURL = 'http://206.189.91.54/';
+
 const fetchChannelData = async (session, chatId, setChannel) => {
-  const endpoint = `http://206.189.91.54/api/v1/channels/${chatId}`;
+  const endpoint = `${baseURL}api/v1/channels/${chatId}`;
   const method = 'GET';
   const headers = {
     'Content-Type': 'application/json',
@@ -20,7 +22,7 @@ const fetchChannelData = async (session, chatId, setChannel) => {
 };
 
 const fetchUserData = async (session, setUsers) => {
-  const endpoint = `http://206.189.91.54/api/v1/users`;
+  const endpoint = `${baseURL}api/v1/users`;
   const method = 'GET';
   const headers = {
     'Content-Type': 'application/json',
@@ -40,7 +42,7 @@ const fetchUserData = async (session, setUsers) => {
 };
 
 const addUser = async (session, chatId, selectedUserId, fetchChannelData) => {
-  const endpoint = 'http://206.189.91.54/api/v1/channel/add_member';
+  const endpoint = `${baseURL}api/v1/channel/add_member`;
   const method = 'POST';
   const headers = {
     'Content-Type': 'application/json',

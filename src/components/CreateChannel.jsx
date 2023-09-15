@@ -4,6 +4,8 @@ import ChatContext from '../contexts/ChatContext';
 import  {MessageContext}  from '../contexts/MessageContext';
 import ReactSelect, {components} from "react-select";
 
+const baseURL = 'http://206.189.91.54/';
+
 function CreateChannel(props) {
   const { session } = useContext(SessionContext);
   const [channel, setChannel] = useState({ channel_members: [] });
@@ -17,7 +19,7 @@ function CreateChannel(props) {
 
   const newChannel = (event) => {
     event.preventDefault();
-    const endpoint = 'http://206.189.91.54/api/v1/channels';
+    const endpoint = `${baseURL}api/v1/channels`;
     const method = 'POST';
     const headers = {
       'Content-Type': 'application/json',
@@ -51,7 +53,7 @@ function CreateChannel(props) {
 };
 
   const fetchUsers = async () => {
-    const endpoint = 'http://206.189.91.54/api/v1/users';
+    const endpoint = `${baseURL}api/v1/users`;
     const method = 'GET';
     const headers = {
       'Content-Type': 'application/json',
@@ -167,7 +169,7 @@ function CreateChannel(props) {
 };
 
 const fetchChannels = (setChannels, session) => {
-  const endpoint = 'http://206.189.91.54/api/v1/channels';
+  const endpoint = `${baseURL}api/v1/channels`;
   const method = 'GET';
   const headers = {
     'Content-Type': 'application/json',

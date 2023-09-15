@@ -13,10 +13,11 @@ const MessageDisplay = () => {
     const { messages, setMessages } = useContext(MessageContext);
     const [toggleMessage, setToggleMessage] = useState(false);
     const scrollRef = useRef(null);
+    const baseURL = 'http://206.189.91.54/'
    
 
     const fetchMessages = () => {
-        const endpoint = `http://206.189.91.54/api/v1/messages?receiver_id=${chat.id}&receiver_class=${chat.type}`;
+        const endpoint = `${baseURL}api/v1/messages?receiver_id=${chat.id}&receiver_class=${chat.type}`;
         const method = 'GET';
         const headers = {
             'Content-Type': 'application/json',
@@ -93,10 +94,11 @@ const SendMessage =(props) => {
     const {chat} = useContext(ChatContext); 
     const [message, setMessage] = useState('');
     const { toggleMessage, setToggleMessage } = props;
+    const baseURL = 'http://206.189.91.54/'
 
     const sendMessage = (event) => {
         event.preventDefault();
-        const endpoint = 'http://206.189.91.54/api/v1/messages';
+        const endpoint = `${baseURL}api/v1/messages`;
         const method = 'POST';
         const headers = {
             'Content-Type': 'application/json',
