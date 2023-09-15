@@ -77,6 +77,7 @@ function CreateChannel(props) {
     })
     .then((data) => {
       const newChannels = [...channels];
+      newChannels.push(data);
       setChannels(newChannels);
     })
     .catch((error) => {
@@ -234,7 +235,7 @@ export const ChannelDisplay = (props) => {
   const { channels, setChannels } = props;
   const { setMessages } = useContext(MessageContext);
   const { chat, setChat } = useContext(ChatContext); 
-  const formatChannelName = (name) => name.replace(/ /g, '-');
+ // const formatChannelName = (name) => name.replace(/ /g, '-');
   
 
   const selectChannel = (event) => {
@@ -280,7 +281,7 @@ export const ChannelDisplay = (props) => {
               data-type={'Channel'}
               onClick={selectChannel}
             >
-              # {formatChannelName(channel.name)}
+              # {channel.name}
             </a>
           </li>
         ))}
