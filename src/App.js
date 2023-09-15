@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <SessionContext.Provider value={ {session, setSession} }>
-        {session ? <Main /> : <LoginRegister />}
+        {session ? <Main /> : <LoginRegister /> }
       </SessionContext.Provider>
     </>
   );
