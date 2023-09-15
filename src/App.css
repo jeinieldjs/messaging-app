@@ -125,7 +125,7 @@ body {
 
 .bottom-btn:hover{
   background-color: #d8323dad;
-  border-radius: 50%;
+  border-radius: 10px;
   border: none;
   padding: 10px;
 }
@@ -253,6 +253,12 @@ body {
   max-height: 250px;
   overflow: auto;
   padding: 10px;
+  background-color:transparent;
+  width: 95%;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .indiv-users a {
   color: #0c0e0c;
@@ -464,14 +470,22 @@ body {
  overflow: scroll;
  color: #0c0e0c;
  padding-left: 10px;
+ padding-top: 5px;
+ background-color:transparent;
+ width: 95%;
+ border-radius: 10px;
+ margin: auto;
+ margin-bottom: 10px;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .channel-list li a{
   color: #0c0e0c;
   list-style: none;
   text-decoration: none;
+  font-weight: 700;
 }
 .channel-list li a:hover{
-  color: #d8323c;
+  color: #eaebea;
 }
 
 .add-member-modal {
@@ -531,3 +545,4 @@ body {
   flex-direction: row;
   align-items: center;
 }
+

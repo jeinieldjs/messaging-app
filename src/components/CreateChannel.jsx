@@ -6,6 +6,38 @@ import ReactSelect, {components} from "react-select";
 
 const baseURL = 'http://206.189.91.54/';
 
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    borderColor: state.isFocused ? "#d8323c" : provided.borderColor,
+    boxShadow: state.isFocused ? `0 0 0 2px #d8323c` : provided.boxShadow,
+    "&:hover": {
+      borderColor: "black",
+    },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#d8323d67" : provided.backgroundColor,
+    color: state.isFocused ? "black" : provided.color,
+    "&:hover": {
+      backgroundColor: "#d8323d67",
+    },
+  }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#d8323d67" : provided.backgroundColor,
+    color: state.isFocused ? "black" : provided.color,
+  }),
+  indicatorSeparator: (provided, state) => ({
+    ...provided,
+    display: 'none',
+  }),
+  dropdownIndicator: (provided, state) => ({
+    ...provided,
+    color: '#d8323c',
+  }),
+};
+
 function CreateChannel(props) {
   const { session } = useContext(SessionContext);
   const [channel, setChannel] = useState({ channel_members: [] });
@@ -34,19 +66,21 @@ function CreateChannel(props) {
     fetch(endpoint, { method, headers, body })
     .then((response) => {
       if (response.status === 200) {
-        console.log('channel created');
+        console.log('Channel created');
         return response.json();
       } else {
-        console.log('failed');
+        console.log('Failed to create channel. Status:', response.status);
+        return response.json().then((errorData) => {
+          throw new Error(errorData.message || 'Unknown error');
+        });
       }
     })
     .then((data) => {
-      //console.log(data)
       const newChannels = [...channels];
       setChannels(newChannels);
     })
     .catch((error) => {
-      console.log(error);
+      console.error('Error creating channel:', error.message);
     });
 
   setShowModal(false);
@@ -151,6 +185,7 @@ function CreateChannel(props) {
                 components={{Option}}
                 onChange={handleChange}
                 value={optionSelected}
+                styles={customStyles}
               />
           </div>
           <div className='modal-bottom'>

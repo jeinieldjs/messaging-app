@@ -62,6 +62,38 @@ const addUser = async (session, chatId, selectedUserId, fetchChannelData) => {
   await fetchChannelData();
 };
 
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    borderColor: state.isFocused ? "#d8323c" : provided.borderColor,
+    boxShadow: state.isFocused ? `0 0 0 2px #d8323c` : provided.boxShadow,
+    "&:hover": {
+      borderColor: "black",
+    },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#d8323d67" : provided.backgroundColor,
+    color: state.isFocused ? "black" : provided.color,
+    "&:hover": {
+      backgroundColor: "#d8323d67",
+    },
+  }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#d8323d67" : provided.backgroundColor,
+    color: state.isFocused ? "black" : provided.color,
+  }),
+  indicatorSeparator: (provided, state) => ({
+    ...provided,
+    display: 'none',
+  }),
+  dropdownIndicator: (provided, state) => ({
+    ...provided,
+    color: '#d8323c',
+  }),
+};
+
 export default function ChannelDetails() {
   const { session } = useContext(SessionContext);
   const { chat } = useContext(ChatContext);
@@ -142,6 +174,7 @@ export default function ChannelDetails() {
                 components={{Option}}
                 onChange={handleChange}
                 value={optionSelected}
+                styles= {customStyles}
                 className='add-new-member'
               /> : null}
           </div>
