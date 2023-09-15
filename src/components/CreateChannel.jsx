@@ -115,7 +115,7 @@ function CreateChannel(props) {
         className='add-channel-btn'
         onClick={toggleModal}
       >
-      <i className='fas fa-plus-square' style={{color: '#eaebea'}}></i>
+      <i className='fas fa-plus-square' style={{color: '#0c0e0c'}}></i>
       Add Channel
       </button>
     </div>

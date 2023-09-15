@@ -4,6 +4,7 @@ import SessionContext from '../contexts/SessionContext';
 import Users from './Users.jsx';
 import CreateChannel from './CreateChannel';
 import { ChannelDisplay } from './CreateChannel';
+import { UserLogo } from './HeaderLogo';
 
 const Sidenav = (props) => {
    const { session, setSession } = useContext(SessionContext)
@@ -23,7 +24,7 @@ return (
     <>
         <div className='sidenav'>
             <div className='logged-user-container'>
-                <h3><i className='fas fa-user-circle' style={{ color: '#eaebea' }}></i>{loggedEmail}</h3>
+                <h3 id='logged-user-line'><UserLogo />{loggedEmail}</h3>
             </div>
             <div className='channel-container'>
                 <h1 className='sidenav-label'>
@@ -45,7 +46,7 @@ return (
             </div>
             <div className='logout-container'>
                 <button className='bottom-btn'>
-                    <i className='fas fa-sign-out-alt' style={{color: '#eaebea'}} onClick={logout}></i>Logout
+                    <i className='fas fa-sign-out-alt' style={{color: '#0c0e0c'}} onClick={logout}></i>Logout
                 </button>
             </div>
         </div>

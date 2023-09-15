@@ -27,5 +27,13 @@ export const AppName = () => {
   
     )
   }
-
+ export const UserLogo = () => {
+  return (
+      <div className='small-icon'>
+      <img
+        id='small-icon-img' 
+        src='https://icons.veryicon.com/png/o/food--drinks/fresh-3/fresh-chicken.png'></img>
+      </div>
+  )
+ }
   export default Header;
