@@ -11,6 +11,7 @@ const LoginRegister = () => {
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [isLoginVisible, setIsLoginVisible] = useState(true);
+    const [registeredEmails, setRegisteredEmails] = useState([]);
     const handleSignUpClick = () => {
         setIsLoginVisible(false);
     };
@@ -53,40 +54,47 @@ const LoginRegister = () => {
 
     const signup = (e) => {
         e.preventDefault();
-
+    
         if (!emailRegEx.test(email)) {
             alert('Please enter a valid email address.');
             return;
-        };
+        }
         if (!passwordRegEx.test(password)) {
             alert('Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one digit.');
             return;
-        };
+        }
         if (password !== passwordConfirmation){
             alert('Passwords entered do not match.');
             return;
         }
-        
-        const endpoint = `${baseURL}auth`
-        const method = 'POST'
-        const headers = { 'Content-Type': 'application/json' }
-        const body = JSON.stringify({ email, password, password_confirmation: passwordConfirmation})
-
-        fetch(endpoint, { method, headers, body })
+    
+        const endpoint = `${baseURL}auth`;
+        const headers = { 'Content-Type': 'application/json' };
+        const body = JSON.stringify({ email, password, password_confirmation: passwordConfirmation });
+    
+        fetch(endpoint, { method: 'POST', headers, body })
             .then(response => {
-                if(response.status === 200){
+                if (response.status === 200) {
                     alert('Congratulations! You may now login with your registered email.');
                     setIsLoginVisible(true);
                     setEmail('');
                     setPassword('');
-                } else{
-                    console.log(response)
+                    setRegisteredEmails([...registeredEmails, email]);
+                } else if (response.status === 422) {
+                    response.json().then(data => {
+                        if (data.errors) {
+                            alert(data.errors.full_messages.join('\n'));
+                        } else {
+                            alert('Validation error occurred during registration.');
+                        }
+                    });
+                } else {
+                    console.log(response);
                 }
             })
             .catch(error => {
                 console.log(error);
-            })
-
+            });
     }
  
 
@@ -156,6 +164,6 @@ const LoginRegister = () => {
           )}
         </div>
     )
-}
+}   
 
 export default LoginRegister;
