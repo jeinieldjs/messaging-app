@@ -4,7 +4,7 @@ export const useSession = (value) => {
     const [session, setSession] = useState(() => {
         const persistedSession = JSON.parse(localStorage.getItem('session') || 'null')
 
-        return persistedSession || {...value, email: null};
+        return persistedSession || value;
     })
 
     useEffect(() => {
