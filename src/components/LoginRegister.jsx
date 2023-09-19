@@ -69,10 +69,11 @@ const LoginRegister = () => {
         }
     
         const endpoint = `${baseURL}auth`;
+        const method = 'POST';
         const headers = { 'Content-Type': 'application/json' };
         const body = JSON.stringify({ email, password, password_confirmation: passwordConfirmation });
     
-        fetch(endpoint, { method: 'POST', headers, body })
+        fetch(endpoint, { method, headers, body })
             .then(response => {
                 if (response.status === 200) {
                     alert('Congratulations! You may now login with your registered email.');
