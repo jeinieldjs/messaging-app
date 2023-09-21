@@ -27,8 +27,8 @@ return (
                 <h3 id='logged-user-line'><UserLogo />{loggedEmail}</h3>
             </div>
             <div className='channel-container'>
-                <h1 className='sidenav-label'>
-                Channels</h1>
+                <h2 className='sidenav-label'>
+                Channels</h2>
                 <div className='channel-list-container'>
                     <ChannelDisplay channels={channels} setChannels={setChannels}/>
                     <CreateChannel channels={channels} setChannels={setChannels}/>
@@ -36,7 +36,7 @@ return (
             </div>
            
             <div className='dm-container'>
-                <h1 className='sidenav-label'> Direct Messages</h1>
+                <h2 className='sidenav-label'> Direct Messages</h2>
                 <div className='search-bar'>
                   <input type='text' placeholder='Search Users' id='user-search' value={searchQuery} onChange={handleSearchChange} />
                 </div>

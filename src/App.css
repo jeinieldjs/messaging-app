@@ -115,11 +115,13 @@ body {
   background-color: transparent;
   padding: 10px;
   display:flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  position: absolute;
-  bottom: 1%;
+  position: relative;
+  bottom: 0.2%;
   left: 0.5%;
+  margin-top: 5px;
+  font-size: 1rem;
 
 }
 
@@ -131,7 +133,7 @@ body {
 }
 
 .bottom-btn i{
-  font-size:1.5rem;
+  font-size:1rem;
   padding-bottom:3px;
 }
 
@@ -160,7 +162,7 @@ body {
   border: none;
   margin-right: 5px;
   color: #0c0e0c;
-  padding: 5px;
+  padding: 10px;
 }
 .add-channel-btn:hover {
   background-color: #d8323dad;
@@ -168,7 +170,7 @@ body {
 }
 
 .sidenav-label{
-  font-size: 1rem;
+  text-align: center;
 }
 
 .users-list{
@@ -180,11 +182,16 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 10px 0px 10px 0px;
+  padding: 20px 0px 10px 0px;
   text-shadow: 1px #eaebea;
   font-size: 1.2rem;
   overflow: auto;
+  border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 15px;
 }
+  
+
 
 /*.logged-user-container h3 {
   font-size: 1.2rem;
