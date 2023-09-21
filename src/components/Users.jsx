@@ -9,24 +9,31 @@ const Users = ({ searchQuery }) => {
   const { chat, setChat } = useContext(ChatContext);
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [loading, setLoading] = useState(true); 
 
   const fetchUsers = async () => {
-    const endpoint = 'http://206.189.91.54/api/v1/users';
-    const method = 'GET';
-    const headers = {
-      'Content-Type': 'application/json',
-      'access-token': session.accessToken,
-      'client': session.client,
-      'expiry': session.expiry,
-      'uid': session.uid
-    };
+    try {
+      const endpoint = 'http://206.189.91.54/api/v1/users';
+      const method = 'GET';
+      const headers = {
+        'Content-Type': 'application/json',
+        'access-token': session.accessToken,
+        'client': session.client,
+        'expiry': session.expiry,
+        'uid': session.uid
+      };
 
-    const response = await fetch(endpoint, { method, headers });
-    const result = await response.json();
+      const response = await fetch(endpoint, { method, headers });
+      const result = await response.json();
 
-    const sortedUsers = result.data.sort((a, b) => (a.uid < b.uid ? -1 : 1));
-    setUsers(sortedUsers);
-    setFilteredUsers(sortedUsers);
+      const sortedUsers = result.data.sort((a, b) => (a.uid < b.uid ? -1 : 1));
+      setUsers(sortedUsers);
+      setFilteredUsers(sortedUsers);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -54,6 +61,13 @@ const Users = ({ searchQuery }) => {
 
   return (
     <>
+     {loading ? (
+        <p style={{
+          color: 'black', 
+          textAlign: 'center', 
+          fontWeight: 'bold'}}>
+            Loading users...</p>
+      ) : (
       <ul className='users-list'>
         {filteredUsers.map((user) => (
           <li key={user.id} className='indiv-users'>
@@ -69,6 +83,7 @@ const Users = ({ searchQuery }) => {
           </li>
         ))}
       </ul>
+      )}
     </>
   );
 };

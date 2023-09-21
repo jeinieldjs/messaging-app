@@ -38,7 +38,7 @@ const customStyles = {
   }),
 };
 
-function CreateChannel(props) {
+function CreateChannel(/*props*/{ channels, setChannels }) {
   const { session } = useContext(SessionContext);
   const [channel, setChannel] = useState({ channel_members: [] });
   const [channelName, setChannelName] = useState('');
@@ -47,10 +47,15 @@ function CreateChannel(props) {
   const [userIds, setUserIds] = useState([]);
   const [user, setUser] = useState({ label: '', value: '' });
   const [showModal, setShowModal] = useState(false);
-  const { channels, setChannels, fetchChannels } = props;
-
+ 
   const newChannel = (event) => {
     event.preventDefault();
+
+    if (channelName.length > 15) {
+      alert("Channel name exceeds 15 characters");
+      return; 
+    }
+
     const endpoint = `${baseURL}api/v1/channels`;
     const method = 'POST';
     const headers = {
@@ -76,12 +81,16 @@ function CreateChannel(props) {
       }
     })
     .then((data) => {
-      const newChannels = [...channels];
-     //newChannels.push(data);
-      setChannels(newChannels);
+      //const newChannels = [...channels];
+      //newChannels.push(data);
+      //setChannels(newChannels);
+      console.log(data);
+      setChannels((prevChannels) => [...prevChannels, data]);
     })
     .catch((error) => {
-      console.error('Error creating channel:', error.message);
+      console.log(error);
+      alert(error[0]); //still not working...
+
     });
 
   setShowModal(false);
@@ -172,6 +181,7 @@ function CreateChannel(props) {
               type="text"
               className="channel-name-input"
               onChange={(e) => setChannelName(e.target.value)}
+              placeholder='Name must be less than 15 characters'
             ></input>
           </div>
           <div className="channel-member-select">
@@ -235,7 +245,20 @@ export const ChannelDisplay = (props) => {
   const { channels, setChannels } = props;
   const { setMessages } = useContext(MessageContext);
   const { chat, setChat } = useContext(ChatContext); 
-  const formatChannelName = (name) => name.replace(/ /g, '-');
+  //const formatChannelName = (name) => name.replace(/ /g, '-');
+  const formatChannelName = (name) => {
+    let formattedName = '';
+    
+    for (let i = 0; i < name.length; i++) {
+      if (name[i] === ' ') {
+        formattedName += '-';
+      } else {
+        formattedName += name[i];
+      }
+    }
+    
+    return formattedName;
+  };
   
 
   const selectChannel = (event) => {

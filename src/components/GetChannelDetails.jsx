@@ -102,13 +102,20 @@ export default function ChannelDetails() {
   const [optionSelected, setOptionSelected] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [showModal, setShowModal] = useState(false); 
-
+  const [isLoading, setIsLoading] = useState(true);
 
 
   useEffect(() => {
     async function fetchData() {
-      await fetchChannelData(session, chat.id, setChannel);
-      await fetchUserData(session, setUsers);
+      try {
+        setIsLoading(true);
+        await fetchChannelData(session, chat.id, setChannel);
+        await fetchUserData(session, setUsers);
+        setIsLoading(false); 
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setIsLoading(false); 
+      }
     }
 
     fetchData();
@@ -147,37 +154,39 @@ export default function ChannelDetails() {
   return (
     <>
       <div id='channel-details-container'>
-      <button 
-        className='show-details-btn'
-        onClick={toggleModal}>
+        <button className='show-details-btn' onClick={toggleModal}>
           <div className='i-wrapper'>i</div>
-      </button>
-    </div>
-    {showModal && (
-      <div className='modal-overlay'>
-        <div className='add-member-modal'>
-          <div className='modal-header'>
-            <h2 style={{textTransform:'uppercase'}}>
-              Channel Details
-            </h2>
-            <button
-              className='close-modal'
-              onClick={toggleModal}
-            >X</button>
-          </div>
-          <div className="channel-member-select">
-            {channel && channel.channel_members ?
-              <ReactSelect
-                options={users.filter(user => !channel.channel_members.some((member) => member.user_id === user.value))}
-                closeMenuOnSelect={false}
-                hideSelectedOptions={false}
-                components={{Option}}
-                onChange={handleChange}
-                value={optionSelected}
-                styles= {customStyles}
-                className='add-new-member'
-              /> : null}
-          </div>
+        </button>
+      </div>
+      {showModal && (
+        <div className='modal-overlay'>
+          <div className='add-member-modal'>
+            <div className='modal-header'>
+              <h2 style={{ textTransform: 'uppercase' }}>
+                Channel Details
+              </h2>
+              <button className='close-modal' onClick={toggleModal}>
+                X
+              </button>
+            </div>
+            <div className="channel-member-select">
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : (
+                channel && channel.channel_members ? (
+                  <ReactSelect
+                    options={users.filter(user => !channel.channel_members.some((member) => member.user_id === user.value))}
+                    closeMenuOnSelect={false}
+                    hideSelectedOptions={false}
+                    components={{Option}}
+                    onChange={handleChange}
+                    value={optionSelected}
+                    styles= {customStyles}
+                    className='add-new-member'
+                  />
+                ) : null
+              )}
+            </div>
           <div className='modal-bottom'>
             <button
               className='create-button'
