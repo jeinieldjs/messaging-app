@@ -71,7 +71,7 @@ function CreateChannel(/*props*/{ channels, setChannels }) {
     fetch(endpoint, { method, headers, body })
     .then((response) => {
       if (response.status === 200) {
-        console.log('Channel created');
+        alert('Channel created successfully.');
         return response.json();
       } else {
         console.log('Failed to create channel. Status:', response.status);
@@ -246,7 +246,7 @@ export const ChannelDisplay = (props) => {
   const { setMessages } = useContext(MessageContext);
   const { chat, setChat } = useContext(ChatContext); 
   //const formatChannelName = (name) => name.replace(/ /g, '-');
-  const formatChannelName = (name) => {
+  /*const formatChannelName = (name) => {
     let formattedName = '';
     
     for (let i = 0; i < name.length; i++) {
@@ -258,7 +258,7 @@ export const ChannelDisplay = (props) => {
     }
     
     return formattedName;
-  };
+  };---error: cannot read length*/
   
 
   const selectChannel = (event) => {
@@ -304,7 +304,7 @@ export const ChannelDisplay = (props) => {
               data-type={'Channel'}
               onClick={selectChannel}
             >
-              # {formatChannelName(channel.name)}
+              # {channel.name}
             </a>
           </li>
         ))}
