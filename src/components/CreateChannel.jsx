@@ -48,6 +48,7 @@ function CreateChannel(/*props*/{ channels, setChannels }) {
   const [user, setUser] = useState({ label: '', value: '' });
   const [showModal, setShowModal] = useState(false);
   const [errors,setErrors] = useState('');
+  const [localChannels, setLocalChannels] = useState([]);
 
   const newChannel = (event) => {
     event.preventDefault();
@@ -75,20 +76,19 @@ function CreateChannel(/*props*/{ channels, setChannels }) {
         alert('Channel created successfully.');
         return response.json();
       } else {
-        //console.log('Failed to create channel. Status:', response.status);
-        //return response.json().then((errorData) => {
-          //throw new Error(errorData.message || 'Unknown error');
-          response.json().then(data =>{
-            setErrors(data.errors.join('. '));
+        console.log('Failed to create channel. Status:', response.status);
+        return response.json().then((errorData) => {
+          throw new Error(errorData.message || 'Unknown error');
         });
       }
     })
     .then((data) => {
       //const newChannels = [...channels];
       //newChannels.push(data);
-      //setChannels(newChannels);
+      //setChannels(newChannels);-->error: cannot iterate thru ...channels + must refresh everytime you add new channel
       console.log(data);
-      setChannels((prevChannels) => [...prevChannels, data]);
+      setLocalChannels((prevChannels) => [...prevChannels, data]);
+      fetchChannels(setChannels, session);
     })
     .catch((error) => {
       console.log(error);
@@ -178,7 +178,6 @@ function CreateChannel(/*props*/{ channels, setChannels }) {
               onClick={toggleModal}
             >X</button>
           </div>
-          {errors ? <p className="error-line" style={{color:'dark gray', fontSize:'0.7rem', textAlign:'center'}}><i>{errors}</i></p> : null}
           <div className="modal-content">
             <label className='modal-labels'>Channel Name</label>
             <input

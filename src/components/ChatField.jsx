@@ -37,7 +37,7 @@ const MessageDisplay = () => {
         setMessages(result.data);
       })
       .catch((error) => {
-        console.log('Error');
+        console.log(error);
       });
   };
 
