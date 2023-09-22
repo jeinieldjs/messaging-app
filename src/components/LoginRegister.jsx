@@ -12,6 +12,7 @@ const LoginRegister = () => {
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [isLoginVisible, setIsLoginVisible] = useState(true);
     const [registeredEmails, setRegisteredEmails] = useState([]);
+    const [errors, setErrors] = useState('');
     const handleSignUpClick = () => {
         setIsLoginVisible(false);
     };
@@ -37,13 +38,17 @@ const LoginRegister = () => {
                         expiry: response.headers.get('expiry'),
                         email: email
                     })
-                } else if (response.status === 404) {
+                } /*else if (response.status === 404) {
                     alert('Email is not registered.');
                 } else if (response.status === 401) {
                     alert('Incorrect email or password.');
                 } else {
                     alert('An error occurred while logging in.');
                     console.log(response);
+                }*/ else {
+                    response.json().then(data =>{
+                        setErrors(data.errors.join('. '));
+                    })
                 }
             })
             .catch(error => {
@@ -55,7 +60,7 @@ const LoginRegister = () => {
     const signup = (e) => {
         e.preventDefault();
     
-        if (!emailRegEx.test(email)) {
+        /*if (!emailRegEx.test(email)) {
             alert('Please enter a valid email address.');
             return;
         }
@@ -66,7 +71,7 @@ const LoginRegister = () => {
         if (password !== passwordConfirmation){
             alert('Passwords entered do not match.');
             return;
-        }
+        }*/
     
         const endpoint = `${baseURL}auth`;
         const method = 'POST';
@@ -81,21 +86,12 @@ const LoginRegister = () => {
                     setEmail('');
                     setPassword('');
                     setRegisteredEmails([...registeredEmails, email]);
-                } else if (response.status === 422) {
-                    response.json().then(data => {
-                        if (data.errors) {
-                            alert(data.errors.full_messages.join('\n'));
-                        } else {
-                            alert('Validation error occurred during registration.');
-                        }
-                    });
                 } else {
-                    console.log(response);
+                    response.json().then(data => {
+                        setErrors(data.errors.full_messages.join('. '));
+                    });
                 }
             })
-            .catch(error => {
-                console.log(error);
-            });
     }
  
 
@@ -125,6 +121,7 @@ const LoginRegister = () => {
                     className='log-input'
                     onChange={e => setPassword(e.target.value)} />
                     <br />
+                {errors ? <p className="error-line" style={{color:'dark gray', fontSize:'0.7rem', textAlign:'center'}}><i>{errors}</i></p> : null}
                 <p id='log-note'>
                 Not yet registered? <button onClick={handleSignUpClick  } className='form-link'>SIGN-UP</button>.
                 </p>
@@ -156,6 +153,7 @@ const LoginRegister = () => {
                     className='log-input' 
                     placeholder='🗝Type your password again'
                     onChange={e => setPasswordConfirmation(e.target.value)} /><br />
+                {errors ? <p className="error-line" style={{color:'dark gray', fontSize:'0.7rem', textAlign:'center'}}><i>{errors}</i></p> : null}
                 <p id='log-note'>
                     Already registered? <button onClick={handleLoginClick} className='form-link'>LOGIN</button>.
                 </p>
