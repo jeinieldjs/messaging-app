@@ -63,12 +63,12 @@ const LoginRegister = () => {
         /*if (!emailRegEx.test(email)) {
             alert('Please enter a valid email address.');
             return;
-        }
+        }*/
         if (!passwordRegEx.test(password)) {
             alert('Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one digit.');
             return;
         }
-        if (password !== passwordConfirmation){
+        /*if (password !== passwordConfirmation){
             alert('Passwords entered do not match.');
             return;
         }*/

@@ -122,7 +122,7 @@ const SendMessage =(props) => {
                 }
             })
             .then((data) => {
-                console.log('message sent');
+                console.log('message sent', {data});
                 setMessage('');
                 setToggleMessage(!toggleMessage);
                
@@ -174,7 +174,7 @@ const ChatField = () => {
     
     return (
         <>
-             <ChatTitle chat={chat} receiverName={chat.name} />
+            <ChatTitle chat={chat} receiverName={chat.name} />
             <MessageDisplay />
             <SendMessage />
             
