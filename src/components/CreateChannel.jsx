@@ -47,7 +47,8 @@ function CreateChannel(/*props*/{ channels, setChannels }) {
   const [userIds, setUserIds] = useState([]);
   const [user, setUser] = useState({ label: '', value: '' });
   const [showModal, setShowModal] = useState(false);
- 
+  const [errors,setErrors] = useState('');
+
   const newChannel = (event) => {
     event.preventDefault();
 
@@ -74,9 +75,11 @@ function CreateChannel(/*props*/{ channels, setChannels }) {
         alert('Channel created successfully.');
         return response.json();
       } else {
-        console.log('Failed to create channel. Status:', response.status);
-        return response.json().then((errorData) => {
-          throw new Error(errorData.message || 'Unknown error');
+        //console.log('Failed to create channel. Status:', response.status);
+        //return response.json().then((errorData) => {
+          //throw new Error(errorData.message || 'Unknown error');
+          response.json().then(data =>{
+            setErrors(data.errors.join('. '));
         });
       }
     })
@@ -175,13 +178,14 @@ function CreateChannel(/*props*/{ channels, setChannels }) {
               onClick={toggleModal}
             >X</button>
           </div>
+          {errors ? <p className="error-line" style={{color:'dark gray', fontSize:'0.7rem', textAlign:'center'}}><i>{errors}</i></p> : null}
           <div className="modal-content">
             <label className='modal-labels'>Channel Name</label>
             <input
               type="text"
               className="channel-name-input"
               onChange={(e) => setChannelName(e.target.value)}
-              placeholder='Name must be less than 15 characters'
+              placeholder='Name must not exceed 15 characters'
             ></input>
           </div>
           <div className="channel-member-select">
